@@ -49,29 +49,29 @@ public class Car extends Entity implements ContainerListener {
 
     private static final EntityDataAccessor<Float> HEALTH = SynchedEntityData.defineId(Car.class, EntityDataSerializers.FLOAT);
 
-    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/white.png");
+    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png");
 
     private static final Map<DyeItem, ResourceLocation> COLOR_MAP = new HashMap<>() {{
-        put(DyeItem.byColor(DyeColor.BLACK), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/black.png"));
-        put(DyeItem.byColor(DyeColor.BLUE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/blue.png"));
-        put(DyeItem.byColor(DyeColor.BROWN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/brown.png"));
-        put(DyeItem.byColor(DyeColor.CYAN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/cyan.png"));
-        put(DyeItem.byColor(DyeColor.GRAY), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/dark_grey.png"));
-        put(DyeItem.byColor(DyeColor.LIGHT_BLUE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/light_blue.png"));
-        put(DyeItem.byColor(DyeColor.LIGHT_GRAY), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/light_grey.png"));
-        put(DyeItem.byColor(DyeColor.LIME), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/lime_green.png"));
-        put(DyeItem.byColor(DyeColor.MAGENTA), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/magenta.png"));
-        put(DyeItem.byColor(DyeColor.ORANGE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/orange.png"));
-        put(DyeItem.byColor(DyeColor.PINK), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/pink.png"));
-        put(DyeItem.byColor(DyeColor.PURPLE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/purple.png"));
-        put(DyeItem.byColor(DyeColor.RED), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/red.png"));
-        put(DyeItem.byColor(DyeColor.WHITE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/white.png"));
-        put(DyeItem.byColor(DyeColor.GREEN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/green.png"));
-        put(DyeItem.byColor(DyeColor.YELLOW), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/yellow.png"));
+        put(DyeItem.byColor(DyeColor.BLACK), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/black.png"));
+        put(DyeItem.byColor(DyeColor.BLUE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/blue.png"));
+        put(DyeItem.byColor(DyeColor.BROWN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/brown.png"));
+        put(DyeItem.byColor(DyeColor.CYAN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/cyan.png"));
+        put(DyeItem.byColor(DyeColor.GRAY), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/dark_grey.png"));
+        put(DyeItem.byColor(DyeColor.LIGHT_BLUE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/light_blue.png"));
+        put(DyeItem.byColor(DyeColor.LIGHT_GRAY), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/light_grey.png"));
+        put(DyeItem.byColor(DyeColor.LIME), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/lime_green.png"));
+        put(DyeItem.byColor(DyeColor.MAGENTA), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/magenta.png"));
+        put(DyeItem.byColor(DyeColor.ORANGE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/orange.png"));
+        put(DyeItem.byColor(DyeColor.PINK), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/pink.png"));
+        put(DyeItem.byColor(DyeColor.PURPLE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/purple.png"));
+        put(DyeItem.byColor(DyeColor.RED), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/red.png"));
+        put(DyeItem.byColor(DyeColor.WHITE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
+        put(DyeItem.byColor(DyeColor.GREEN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/green.png"));
+        put(DyeItem.byColor(DyeColor.YELLOW), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/yellow.png"));
     }};
 
     private static final float MAX_HEALTH = 20f;
-    private static final float SPEED = 0.07f;
+    private static final float SPEED = 0.5f;
     private static final float TURN_SPEED = 1f;
     private static final float MAX_TURN = 5f;
     private static final float FRICTION = 0.7f;
@@ -80,8 +80,6 @@ public class Car extends Entity implements ContainerListener {
 
     private float targetRotation = 0;
     private float currentRotation = 0;
-
-    private int tillerCooldown = 0;
 
     public int forwardMotion = 1;
 
@@ -159,15 +157,30 @@ public class Car extends Entity implements ContainerListener {
         float deg = (float) (Math.atan2(xStep, zStep) * 180 / Math.PI);
 
         if(xStep * xStep + zStep * zStep != 0) {
-            this.driveTick = (this.driveTick + 1) % 30; // dragoon this 30 number is hardcoded I will come up with something better when I work on ME or something idk who cares it took like 2 seconds to figure out
+            this.driveTick = (this.driveTick + 1) % 100; // dragoon this 30 number is hardcoded I will come up with something better when I work on ME or something idk who cares it took like 2 seconds to figure out  // thanks tenks dont worry about it
             this.forwardMotion = (Math.round(mod(this.getYRot(), 360) + deg) == 180) ? -1 : 1;
         }
     }
 
     @Override
     public void positionRider(Entity entity) {
-        if(this.hasPassenger(entity)) {
-            entity.setPos(this.calcOffset(0, 0.8, -0.5));
+        if (this.hasPassenger(entity)) {
+
+            double offsetX = 0.6;
+            double offsetY = 0.3;
+            double offsetZ = -0.2;
+
+            double radYaw = Math.toRadians(this.getYRot());
+
+            double offsetXRotated = offsetX * Math.cos(radYaw) - offsetZ * Math.sin(radYaw);
+            double offsetYRotated = offsetY;
+            double offsetZRotated = offsetX * Math.sin(radYaw) + offsetZ * Math.cos(radYaw);
+
+            double x = this.getX() + offsetXRotated;
+            double y = this.getY() + offsetYRotated;
+            double z = this.getZ() + offsetZRotated;
+
+            entity.setPos(x, y, z);
         }
     }
 
