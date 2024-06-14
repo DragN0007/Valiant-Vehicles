@@ -9,5 +9,12 @@
   "entity.dragnvehicles.truck": "Pickup Truck",
 
   "item.dragnvehicles.suv": "SUV",
-  "entity.dragnvehicles.suv": "SUV"
+  "entity.dragnvehicles.suv": "SUV",
+
+  "item.dragnvehicles.car_body": "Modern Car Body",
+  "item.dragnvehicles.classic_body": "Classic Car Body",
+  "item.dragnvehicles.truck_body": "Pickup Truck Body",
+  "item.dragnvehicles.suv_body": "SUV Body",
+  "item.dragnvehicles.wheel": "Wheel",
+  "item.dragnvehicles.engine": "Engine"
 }

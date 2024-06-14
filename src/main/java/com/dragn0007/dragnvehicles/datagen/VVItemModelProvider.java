@@ -26,6 +26,7 @@ public class VVItemModelProvider extends ItemModelProvider {
         simpleItem(ItemRegistry.TRUCK_BODY.get());
         simpleItem(ItemRegistry.SUV_BODY.get());
         simpleItem(ItemRegistry.WHEEL.get());
+        simpleItem(ItemRegistry.ENGINE.get());
     }
 
     private ItemModelBuilder simpleItem(Item item) {
