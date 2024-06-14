@@ -1,0 +1,13 @@
+{
+  "item.dragnvehicles.car": "Modern Car",
+  "entity.dragnvehicles.car": "Modern Car",
+
+  "item.dragnvehicles.classic": "Classic Car",
+  "entity.dragnvehicles.classic": "Classic Car",
+
+  "item.dragnvehicles.truck": "Pickup Truck",
+  "entity.dragnvehicles.truck": "Pickup Truck",
+
+  "item.dragnvehicles.suv": "SUV",
+  "entity.dragnvehicles.suv": "SUV"
+}
