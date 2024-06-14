@@ -1,8 +1,6 @@
 package com.dragn0007.dragnvehicles.vehicle.suv;
 
 import com.dragn0007.dragnvehicles.Animation;
-import com.dragn0007.dragnvehicles.vehicle.car.Car;
-import com.dragn0007.dragnvehicles.vehicle.car.CarRender;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -11,7 +9,6 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 
 public class SUVModel extends EntityModel<SUV> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "suv"), "main");

@@ -2,7 +2,6 @@ package com.dragn0007.dragnvehicles.vehicle.classic;
 
 import com.dragn0007.dragnvehicles.ValiantVehiclesMain;
 import com.dragn0007.dragnvehicles.registry.ItemRegistry;
-import com.dragn0007.dragnvehicles.vehicle.car.Car;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Direction;

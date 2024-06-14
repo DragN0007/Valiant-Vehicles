@@ -2,8 +2,6 @@ package com.dragn0007.dragnvehicles.vehicle.suv;
 
 import com.dragn0007.dragnvehicles.Animation;
 import com.dragn0007.dragnvehicles.ValiantVehiclesMain;
-import com.dragn0007.dragnvehicles.vehicle.car.Car;
-import com.dragn0007.dragnvehicles.vehicle.car.CarModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;

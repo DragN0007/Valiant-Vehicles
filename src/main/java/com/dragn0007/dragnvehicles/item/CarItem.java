@@ -1,6 +1,5 @@
 package com.dragn0007.dragnvehicles.item;
 
-import com.dragn0007.dragnvehicles.ValiantVehiclesMain;
 import com.dragn0007.dragnvehicles.registry.VehicleRegistry;
 import com.dragn0007.dragnvehicles.vehicle.car.Car;
 import net.minecraft.core.BlockPos;
