@@ -1,5 +1,8 @@
 package com.dragn0007.dragnvehicles.item;
 
+import com.dragn0007.dragnvehicles.ValiantVehiclesMain;
+import com.dragn0007.dragnvehicles.registry.VehicleRegistry;
+import com.dragn0007.dragnvehicles.vehicle.car.Car;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
@@ -37,8 +40,8 @@ public class CarItem extends Item {
             if(level.getBlockState(pos).getBlock() instanceof LiquidBlock) {
                 return InteractionResultHolder.pass(itemStack);
             } else if (level.mayInteract(player, pos) && player.mayUseItemAt(pos, blockHitResult.getDirection(), itemStack)) {
-                Tractor tractor = (Tractor) LittleTractorMain.TRACTOR.get().spawn((ServerLevel) level, itemStack, player, pos.above(), MobSpawnType.SPAWN_EGG, false, false);
-                if(tractor == null) {
+                Car car = (Car) VehicleRegistry.CAR.get().spawn((ServerLevel) level, itemStack, player, pos.above(), MobSpawnType.SPAWN_EGG, false, false);
+                if(car == null) {
                     return InteractionResultHolder.pass(itemStack);
                 } else {
                     if(!player.getAbilities().instabuild) {

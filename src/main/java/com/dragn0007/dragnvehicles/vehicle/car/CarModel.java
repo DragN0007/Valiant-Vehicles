@@ -1,6 +1,7 @@
 package com.dragn0007.dragnvehicles.vehicle.car;
 
 
+import com.dragn0007.dragnvehicles.Animation;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -12,7 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
 public class CarModel<T extends Entity> extends EntityModel<T> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "car"), "main");
 	private final ModelPart Body;
 	private final ModelPart FrontWheels;
 	private final ModelPart BackWheels;
@@ -100,14 +100,28 @@ public class CarModel<T extends Entity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		this.Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		this.FrontWheels.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		this.BackWheels.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		FrontWheels.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		BackWheels.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void prepareMobModel(Car car, float p_102615_, float p_102616_, float partialTick) {
+		Animation.animate(this.body, TractorRenderer.BODY_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.frontWheels, TractorRenderer.FRONT_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.backWheels, TractorRenderer.BACK_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.tiller, TractorRenderer.TILLER_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+	}
+
+	@Override
+	public void setupAnim(Car car, float partialTick, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		car.updateLastDrivePartialTick(partialTick);
+		Animation.animate(this.body, TractorRenderer.BODY_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.frontWheels, TractorRenderer.FRONT_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.backWheels, TractorRenderer.BACK_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.tiller, TractorRenderer.TILLER_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+
+		this.frontWheels.yRot = car.getFrontWheelRotation(partialTick);
 	}
 }

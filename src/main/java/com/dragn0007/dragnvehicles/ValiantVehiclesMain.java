@@ -1,5 +1,7 @@
 package com.dragn0007.dragnvehicles;
 
+import com.dragn0007.dragnvehicles.registry.ItemRegistry;
+import com.dragn0007.dragnvehicles.registry.VehicleRegistry;
 import com.mojang.logging.LogUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.syncher.EntityDataSerializer;
@@ -62,6 +64,10 @@ public class ValiantVehiclesMain
 
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::setup);
+
+        SERIALIZERS.register(eventBus);
+        ItemRegistry.ITEMS.register(eventBus);
+        VehicleRegistry.ENTITY_TYPES.register(eventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
