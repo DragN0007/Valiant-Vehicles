@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "B B",
+    "B B"
+  ],
+  "key": {
+    "A": {
+      "item": "dragnvehicles:truck_body"
+    },
+    "B": {
+      "item": "dragnvehicles:wheel"
+    }
+  },
+  "result": {
+    "item": "dragnvehicles:truck"
+  }
+}

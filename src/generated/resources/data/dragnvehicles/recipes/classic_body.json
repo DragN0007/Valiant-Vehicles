@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DCB",
+    "A A"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:iron_block"
+    },
+    "B": {
+      "item": "minecraft:chest"
+    },
+    "C": {
+      "item": "minecraft:glass_pane"
+    },
+    "D": {
+      "item": "dragnvehicles:engine"
+    }
+  },
+  "result": {
+    "item": "dragnvehicles:classic_body"
+  }
+}

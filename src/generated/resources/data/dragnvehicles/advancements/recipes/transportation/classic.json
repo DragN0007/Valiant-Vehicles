@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "dragnvehicles:classic"
+    ]
+  },
+  "criteria": {
+    "has_body": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dragnvehicles:classic_body"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "dragnvehicles:classic"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_body",
+      "has_the_recipe"
+    ]
+  ]
+}

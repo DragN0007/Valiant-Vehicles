@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ACA",
+    "DAB",
+    "A A"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:iron_block"
+    },
+    "B": {
+      "item": "minecraft:chest"
+    },
+    "C": {
+      "item": "minecraft:glass_pane"
+    },
+    "D": {
+      "item": "dragnvehicles:engine"
+    }
+  },
+  "result": {
+    "item": "dragnvehicles:car_body"
+  }
+}
