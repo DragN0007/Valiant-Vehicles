@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
-public class CarModel<T extends Entity> extends EntityModel<T> {
+public class CarModel extends EntityModel<Car> {
 	private final ModelPart Body;
 	private final ModelPart FrontWheels;
 	private final ModelPart BackWheels;
@@ -108,20 +108,18 @@ public class CarModel<T extends Entity> extends EntityModel<T> {
 
 	@Override
 	public void prepareMobModel(Car car, float p_102615_, float p_102616_, float partialTick) {
-		Animation.animate(this.body, TractorRenderer.BODY_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
-		Animation.animate(this.frontWheels, TractorRenderer.FRONT_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
-		Animation.animate(this.backWheels, TractorRenderer.BACK_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
-		Animation.animate(this.tiller, TractorRenderer.TILLER_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.Body, CarRender.BODY_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.FrontWheels, CarRender.FRONT_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.BackWheels, CarRender.BACK_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
 	}
 
 	@Override
 	public void setupAnim(Car car, float partialTick, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		car.updateLastDrivePartialTick(partialTick);
-		Animation.animate(this.body, TractorRenderer.BODY_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
-		Animation.animate(this.frontWheels, TractorRenderer.FRONT_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
-		Animation.animate(this.backWheels, TractorRenderer.BACK_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
-		Animation.animate(this.tiller, TractorRenderer.TILLER_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.Body, CarRender.BODY_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.FrontWheels, CarRender.FRONT_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.BackWheels, CarRender.BACK_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
 
-		this.frontWheels.yRot = car.getFrontWheelRotation(partialTick);
+		this.FrontWheels.yRot = car.getFrontWheelRotation(partialTick);
 	}
 }
