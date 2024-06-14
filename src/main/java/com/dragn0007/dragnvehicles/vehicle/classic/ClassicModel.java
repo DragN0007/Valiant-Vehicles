@@ -1,5 +1,9 @@
 package com.dragn0007.dragnvehicles.vehicle.classic;
 
+import com.dragn0007.dragnvehicles.Animation;
+import com.dragn0007.dragnvehicles.vehicle.car.Car;
+import com.dragn0007.dragnvehicles.vehicle.car.CarRender;
+import com.dragn0007.dragnvehicles.vehicle.suv.SUV;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -10,8 +14,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
-public class ClassicModel<T extends Entity> extends EntityModel<T> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "classic"), "main");
+public class ClassicModel extends EntityModel<Classic> {
 	private final ModelPart Body;
 	private final ModelPart FrontWheels;
 	private final ModelPart BackWheels;
@@ -102,14 +105,26 @@ public class ClassicModel<T extends Entity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		this.Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		this.FrontWheels.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		this.BackWheels.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		FrontWheels.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		BackWheels.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void prepareMobModel(Classic classic, float p_102615_, float p_102616_, float partialTick) {
+		Animation.animate(this.Body, ClassicRender.BODY_ANIMATION, classic.driveTick, classic.lastDrivePartialTick, classic.forwardMotion);
+		Animation.animate(this.FrontWheels, ClassicRender.FRONT_WHEEL_ANIMATION, classic.driveTick, classic.lastDrivePartialTick, classic.forwardMotion);
+		Animation.animate(this.BackWheels, ClassicRender.BACK_WHEEL_ANIMATION, classic.driveTick, classic.lastDrivePartialTick, classic.forwardMotion);
+	}
+
+	@Override
+	public void setupAnim(Classic classic, float partialTick, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		classic.updateLastDrivePartialTick(partialTick);
+		Animation.animate(this.Body, ClassicRender.BODY_ANIMATION, classic.driveTick, classic.lastDrivePartialTick, classic.forwardMotion);
+		Animation.animate(this.FrontWheels, ClassicRender.FRONT_WHEEL_ANIMATION, classic.driveTick, classic.lastDrivePartialTick, classic.forwardMotion);
+		Animation.animate(this.BackWheels, ClassicRender.BACK_WHEEL_ANIMATION, classic.driveTick, classic.lastDrivePartialTick, classic.forwardMotion);
+
+		this.FrontWheels.yRot = classic.getFrontWheelRotation(partialTick);
 	}
 }

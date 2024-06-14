@@ -1,5 +1,8 @@
 package com.dragn0007.dragnvehicles.vehicle.suv;
 
+import com.dragn0007.dragnvehicles.Animation;
+import com.dragn0007.dragnvehicles.vehicle.car.Car;
+import com.dragn0007.dragnvehicles.vehicle.car.CarRender;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -10,7 +13,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
-public class SUVModel<T extends Entity> extends EntityModel<T> {
+public class SUVModel extends EntityModel<SUV> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "suv"), "main");
 	private final ModelPart Body;
 	private final ModelPart FrontWheels;
@@ -101,14 +104,26 @@ public class SUVModel<T extends Entity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		this.Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		this.FrontWheels.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		this.BackWheels.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		FrontWheels.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		BackWheels.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void prepareMobModel(SUV suv, float p_102615_, float p_102616_, float partialTick) {
+		Animation.animate(this.Body, SUVRender.BODY_ANIMATION, suv.driveTick, suv.lastDrivePartialTick, suv.forwardMotion);
+		Animation.animate(this.FrontWheels, SUVRender.FRONT_WHEEL_ANIMATION, suv.driveTick, suv.lastDrivePartialTick, suv.forwardMotion);
+		Animation.animate(this.BackWheels, SUVRender.BACK_WHEEL_ANIMATION, suv.driveTick, suv.lastDrivePartialTick, suv.forwardMotion);
+	}
+
+	@Override
+	public void setupAnim(SUV suv, float partialTick, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		suv.updateLastDrivePartialTick(partialTick);
+		Animation.animate(this.Body, SUVRender.BODY_ANIMATION, suv.driveTick, suv.lastDrivePartialTick, suv.forwardMotion);
+		Animation.animate(this.FrontWheels, SUVRender.FRONT_WHEEL_ANIMATION, suv.driveTick, suv.lastDrivePartialTick, suv.forwardMotion);
+		Animation.animate(this.BackWheels, SUVRender.BACK_WHEEL_ANIMATION, suv.driveTick, suv.lastDrivePartialTick, suv.forwardMotion);
+
+		this.FrontWheels.yRot = suv.getFrontWheelRotation(partialTick);
 	}
 }

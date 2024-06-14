@@ -54,24 +54,24 @@ public class Car extends Entity implements ContainerListener {
     private static final Map<DyeItem, ResourceLocation> COLOR_MAP = new HashMap<>() {{
         put(DyeItem.byColor(DyeColor.BLACK), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/black.png"));
         put(DyeItem.byColor(DyeColor.BLUE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/blue.png"));
-        put(DyeItem.byColor(DyeColor.BROWN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/brown.png"));
-        put(DyeItem.byColor(DyeColor.CYAN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/cyan.png"));
-        put(DyeItem.byColor(DyeColor.GRAY), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/dark_grey.png"));
-        put(DyeItem.byColor(DyeColor.LIGHT_BLUE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/light_blue.png"));
-        put(DyeItem.byColor(DyeColor.LIGHT_GRAY), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/light_grey.png"));
-        put(DyeItem.byColor(DyeColor.LIME), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/lime_green.png"));
-        put(DyeItem.byColor(DyeColor.MAGENTA), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/magenta.png"));
-        put(DyeItem.byColor(DyeColor.ORANGE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/orange.png"));
+        put(DyeItem.byColor(DyeColor.BROWN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
+        put(DyeItem.byColor(DyeColor.CYAN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
+        put(DyeItem.byColor(DyeColor.GRAY), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
+        put(DyeItem.byColor(DyeColor.LIGHT_BLUE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
+        put(DyeItem.byColor(DyeColor.LIGHT_GRAY), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
+        put(DyeItem.byColor(DyeColor.LIME), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
+        put(DyeItem.byColor(DyeColor.MAGENTA), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
+        put(DyeItem.byColor(DyeColor.ORANGE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
         put(DyeItem.byColor(DyeColor.PINK), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/pink.png"));
         put(DyeItem.byColor(DyeColor.PURPLE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/purple.png"));
         put(DyeItem.byColor(DyeColor.RED), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/red.png"));
         put(DyeItem.byColor(DyeColor.WHITE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
         put(DyeItem.byColor(DyeColor.GREEN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/green.png"));
-        put(DyeItem.byColor(DyeColor.YELLOW), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/yellow.png"));
+        put(DyeItem.byColor(DyeColor.YELLOW), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
     }};
 
     private static final float MAX_HEALTH = 20f;
-    private static final float SPEED = 0.2f;
+    private static final float SPEED = 0.18f;
     private static final float TURN_SPEED = 1f;
     private static final float MAX_TURN = 5f;
     private static final float FRICTION = 0.7f;
