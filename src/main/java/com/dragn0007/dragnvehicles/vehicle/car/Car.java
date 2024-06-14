@@ -71,7 +71,7 @@ public class Car extends Entity implements ContainerListener {
     }};
 
     private static final float MAX_HEALTH = 20f;
-    private static final float SPEED = 0.5f;
+    private static final float SPEED = 0.2f;
     private static final float TURN_SPEED = 1f;
     private static final float MAX_TURN = 5f;
     private static final float FRICTION = 0.7f;
@@ -157,7 +157,7 @@ public class Car extends Entity implements ContainerListener {
         float deg = (float) (Math.atan2(xStep, zStep) * 180 / Math.PI);
 
         if(xStep * xStep + zStep * zStep != 0) {
-            this.driveTick = (this.driveTick + 1) % 100; // dragoon this 30 number is hardcoded I will come up with something better when I work on ME or something idk who cares it took like 2 seconds to figure out  // thanks tenks dont worry about it
+            this.driveTick = (this.driveTick + 1) % 30; // dragoon this 30 number is hardcoded I will come up with something better when I work on ME or something idk who cares it took like 2 seconds to figure out  // thanks tenks dont worry about it
             this.forwardMotion = (Math.round(mod(this.getYRot(), 360) + deg) == 180) ? -1 : 1;
         }
     }

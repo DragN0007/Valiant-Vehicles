@@ -16,22 +16,22 @@ import org.jetbrains.annotations.NotNull;
 public class CarRender extends EntityRenderer<Car> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ValiantVehiclesMain.MODID, "car"), "main");
 
-    public static final Animation BODY_ANIMATION = new Animation(1.5f, new Animation.KeyFrame[]{
+    public static final Animation BODY_ANIMATION = new Animation(1f, new Animation.KeyFrame[]{
             new Animation.KeyFrame(0f, 0f, 0f, 0f),
-            new Animation.KeyFrame(0.375f, 1f, 0f, -1f),
-            new Animation.KeyFrame(0.75f, 0f, 0f, 0f),
-            new Animation.KeyFrame(1.125f, 1f, 0f, 1f),
-            new Animation.KeyFrame(1.5f, 0f, 0f, 0f),
+            new Animation.KeyFrame(0.25f, 0f, 0f, -0.5f),
+            new Animation.KeyFrame(0.5f, 0f, 0f, 0f),
+            new Animation.KeyFrame(0.75f, 0f, 0f, 0.5f),
+            new Animation.KeyFrame(1f, 0f, 0f, 0f),
     });
 
-    public static final Animation FRONT_WHEEL_ANIMATION = new Animation(1.5f, new Animation.KeyFrame[]{
+    public static final Animation FRONT_WHEEL_ANIMATION = new Animation(1f, new Animation.KeyFrame[]{
             new Animation.KeyFrame(0f, 0f, 0f, 0f),
-            new Animation.KeyFrame(1.5f, 360f, 0f, 0f)
+            new Animation.KeyFrame(1f, 360f, 0f, 0f)
     });
 
-    public static final Animation BACK_WHEEL_ANIMATION = new Animation(1.5f, new Animation.KeyFrame[]{
+    public static final Animation BACK_WHEEL_ANIMATION = new Animation(1f, new Animation.KeyFrame[]{
             new Animation.KeyFrame(0f, 0f, 0f, 0f),
-            new Animation.KeyFrame(1.5f, 360f, 0f, 0f)
+            new Animation.KeyFrame(1f, 360f, 0f, 0f)
     });
 
 
