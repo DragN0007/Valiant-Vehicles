@@ -72,7 +72,7 @@ public class Truck extends Entity implements ContainerListener {
     private static final float MAX_HEALTH = 25f;
     private static final float SPEED = 0.15f;
     private static final float TURN_SPEED = 1f;
-    private static final float MAX_TURN = 5f;
+    private static final float MAX_TURN = 6f;
     private static final float FRICTION = 0.7f;
     private static final float GRAVITY = 0.08f;
 
@@ -181,6 +181,10 @@ public class Truck extends Entity implements ContainerListener {
 
             entity.setPos(x, y, z);
         }
+    }
+
+    public double getPassengersRidingOffset() {
+        return -1;
     }
 
     @Override

@@ -72,7 +72,7 @@ public class Classic extends Entity implements ContainerListener {
         private static final float MAX_HEALTH = 20f;
         private static final float SPEED = 0.18f;
         private static final float TURN_SPEED = 1f;
-        private static final float MAX_TURN = 5f;
+        private static final float MAX_TURN = 6f;
         private static final float FRICTION = 0.7f;
         private static final float GRAVITY = 0.08f;
 
@@ -320,7 +320,7 @@ public class Classic extends Entity implements ContainerListener {
                 } else {
                     if (!this.level.isClientSide) {
                         NetworkHooks.openGui((ServerPlayer) player, new SimpleMenuProvider((containerId, inventory, serverPlayer) -> {
-                            return ChestMenu.sixRows(containerId, inventory, this.inventory);
+                            return ChestMenu.threeRows(containerId, inventory, this.inventory);
                         }, this.getDisplayName()));
                     }
                 }
