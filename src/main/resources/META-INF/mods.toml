@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[40,)"
+license="All Rights Reserved, DragN0007"
+issueTrackerURL="https://discord.gg/jubppqCzXj"
+[[mods]]
+modId="dragnvehicles"
+version="${1.18.2-1.0}"
+displayName="DragN's Valiant Vehicles"
+logoFile="dv.png"
+#credits="DragN0007"
+authors="DragN0007"
+description='''
+New cars, trucks, and other vehicles!
+'''
+[[dependencies.dragnvehicles]]
+modId="forge"
+mandatory=true
+versionRange="[40,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.dragnvehicles]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.18.2,1.19.0)"
+ordering="NONE"
+side="BOTH"
