@@ -7,6 +7,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -23,6 +24,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
@@ -97,7 +99,11 @@ public class SUV extends Entity implements ContainerListener {
 
     public SUV(EntityType < ? > entityType, Level level){
         super(entityType, level);
-        this.inventory = new SimpleContainer(54);
+        this.createInventory();
+    }
+
+    private void createInventory() {
+        this.inventory = new SimpleContainer(36);
         this.inventory.addListener(this);
         this.itemHandler = LazyOptional.of(() -> new InvWrapper(this.inventory));
     }
@@ -320,7 +326,7 @@ public class SUV extends Entity implements ContainerListener {
             } else {
                 if (!this.level.isClientSide) {
                     NetworkHooks.openGui((ServerPlayer) player, new SimpleMenuProvider((containerId, inventory, serverPlayer) -> {
-                        return ChestMenu.sixRows(containerId, inventory, this.inventory);
+                        return new ChestMenu(MenuType.GENERIC_9x4, containerId, inventory, this.inventory, 4);
                     }, this.getDisplayName()));
                 }
             }
@@ -341,32 +347,33 @@ public class SUV extends Entity implements ContainerListener {
     }
 
     @Override
-    protected void readAdditionalSaveData (CompoundTag compoundTag){
+    protected void readAdditionalSaveData(CompoundTag compoundTag) {
         ResourceLocation texture = ResourceLocation.tryParse(compoundTag.getString("Texture"));
         this.entityData.set(TEXTURE, texture == null ? DEFAULT_TEXTURE : texture);
         this.entityData.set(HEALTH, compoundTag.getFloat("Health"));
 
-        ListTag listTag = compoundTag.getList("Items", 10);
-        for (int i = 0; i < listTag.size(); i++) {
+        this.createInventory();
+        ListTag listTag = compoundTag.getList("Items", Tag.TAG_COMPOUND);
+        for(int i = 0; i < listTag.size(); i++) {
             CompoundTag tag = listTag.getCompound(i);
-            int j = compoundTag.getByte("Slot") & 255;
-            if (j < this.inventory.getContainerSize()) {
+            int j = tag.getByte("Slot") & 255;
+            if(j < this.inventory.getContainerSize()) {
                 this.inventory.setItem(j, ItemStack.of(tag));
             }
         }
     }
 
     @Override
-    protected void addAdditionalSaveData (CompoundTag compoundTag){
+    protected void addAdditionalSaveData(CompoundTag compoundTag) {
         compoundTag.putString("Texture", this.entityData.get(TEXTURE).toString());
         compoundTag.putFloat("Health", this.entityData.get(HEALTH));
 
         ListTag listTag = new ListTag();
-        for (int i = 0; i < this.inventory.getContainerSize(); i++) {
+        for(int i = 0; i < this.inventory.getContainerSize(); i++) {
             ItemStack itemStack = this.inventory.getItem(i);
-            if (!itemStack.isEmpty()) {
+            if(!itemStack.isEmpty()) {
                 CompoundTag tag = new CompoundTag();
-                tag.putByte("Slot", (byte) i);
+                tag.putByte("Slot", (byte)i);
                 itemStack.save(tag);
                 listTag.add(tag);
             }

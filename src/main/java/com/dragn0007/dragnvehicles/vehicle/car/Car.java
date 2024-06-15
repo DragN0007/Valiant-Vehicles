@@ -7,6 +7,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -98,6 +99,10 @@ public class Car extends Entity implements ContainerListener {
 
     public Car(EntityType<?> entityType, Level level) {
         super(entityType, level);
+        this.createInventory();
+    }
+
+    private void createInventory() {
         this.inventory = new SimpleContainer(27);
         this.inventory.addListener(this);
         this.itemHandler = LazyOptional.of(() -> new InvWrapper(this.inventory));
@@ -347,10 +352,11 @@ public class Car extends Entity implements ContainerListener {
         this.entityData.set(TEXTURE, texture == null ? DEFAULT_TEXTURE : texture);
         this.entityData.set(HEALTH, compoundTag.getFloat("Health"));
 
-        ListTag listTag = compoundTag.getList("Items", 10);
+        this.createInventory();
+        ListTag listTag = compoundTag.getList("Items", Tag.TAG_COMPOUND);
         for(int i = 0; i < listTag.size(); i++) {
             CompoundTag tag = listTag.getCompound(i);
-            int j = compoundTag.getByte("Slot") & 255;
+            int j = tag.getByte("Slot") & 255;
             if(j < this.inventory.getContainerSize()) {
                 this.inventory.setItem(j, ItemStack.of(tag));
             }
@@ -367,7 +373,7 @@ public class Car extends Entity implements ContainerListener {
             ItemStack itemStack = this.inventory.getItem(i);
             if(!itemStack.isEmpty()) {
                 CompoundTag tag = new CompoundTag();
-                tag.putByte("Slot", (byte) i);
+                tag.putByte("Slot", (byte)i);
                 itemStack.save(tag);
                 listTag.add(tag);
             }
