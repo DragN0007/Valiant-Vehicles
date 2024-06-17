@@ -79,20 +79,14 @@ public class Car extends Entity implements ContainerListener {
     private static final float MAX_TURN = 6f;
     private static final float FRICTION = 0.7f;
     private static final float GRAVITY = 0.08f;
-
-
     private float targetRotation = 0;
     private float currentRotation = 0;
-
     public int forwardMotion = 1;
-
     public int driveTick = 0;
     public float lastDrivePartialTick = 0;
     public Vec3 lastPos = Vec3.ZERO;
-
     public SimpleContainer inventory;
     private LazyOptional<?> itemHandler;
-
     private int lerpSteps;
     private double targetX;
     private double targetY;
