@@ -167,26 +167,25 @@ public class Truck extends Entity implements ContainerListener {
     }
 
     @Override
-    public void positionRider (Entity entity){
-        if (this.hasPassenger(entity)) {
+    protected boolean canAddPassenger(Entity entity) {
+        return this.getPassengers().size() < 4;
+    }
 
-            double offsetX = 0.6;
-            double offsetY = 0.3;
-            double offsetZ = -0.2;
-
-            double radYaw = Math.toRadians(this.getYRot());
-
-            double offsetXRotated = offsetX * Math.cos(radYaw) - offsetZ * Math.sin(radYaw);
-            double offsetYRotated = offsetY;
-            double offsetZRotated = offsetX * Math.sin(radYaw) + offsetZ * Math.cos(radYaw);
-
-            double x = this.getX() + offsetXRotated;
-            double y = this.getY() + offsetYRotated;
-            double z = this.getZ() + offsetZRotated;
-
-            entity.setPos(x, y, z);
+    @Override
+    public void positionRider(Entity entity) {
+        int i = this.getPassengers().indexOf(entity);
+        switch (i) {
+            case 0:
+                entity.setPos(this.calcOffset(0.6, 0.3, -0.2));
+                break;
+            case 1:
+                entity.setPos(this.calcOffset(-0.6, 0.3, -0.2));
+                break;
         }
     }
+    // 0 = Driver
+
+    // 0 | 1
 
     public double getPassengersRidingOffset() {
         return -1;
@@ -292,6 +291,12 @@ public class Truck extends Entity implements ContainerListener {
             this.setDeltaMovement(Vec3.ZERO);
         }
 
+        if(!this.level.isClientSide) {
+            if (this.isUnderWater()) {
+                this.hurt(DamageSource.DROWN, 1);
+                this.ejectPassengers();
+            }
+        }
 
         if (this.lerpSteps > 0) {
             double x = this.getX() + (this.targetX - this.getX()) / this.lerpSteps;
