@@ -57,7 +57,7 @@ public class Truck extends Entity implements ContainerListener {
         put(DyeItem.byColor(DyeColor.BROWN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/truck/white.png"));
         put(DyeItem.byColor(DyeColor.CYAN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/truck/white.png"));
         put(DyeItem.byColor(DyeColor.GRAY), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/truck/white.png"));
-        put(DyeItem.byColor(DyeColor.LIGHT_BLUE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/truck/white.png"));
+        put(DyeItem.byColor(DyeColor.LIGHT_BLUE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/truck/light_blue.png"));
         put(DyeItem.byColor(DyeColor.LIGHT_GRAY), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/truck/white.png"));
         put(DyeItem.byColor(DyeColor.LIME), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/truck/white.png"));
         put(DyeItem.byColor(DyeColor.MAGENTA), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/truck/white.png"));
@@ -67,7 +67,7 @@ public class Truck extends Entity implements ContainerListener {
         put(DyeItem.byColor(DyeColor.RED), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/truck/red.png"));
         put(DyeItem.byColor(DyeColor.WHITE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/truck/white.png"));
         put(DyeItem.byColor(DyeColor.GREEN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/truck/green.png"));
-        put(DyeItem.byColor(DyeColor.YELLOW), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/truck/white.png"));
+        put(DyeItem.byColor(DyeColor.YELLOW), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/truck/yellow.png"));
     }};
 
     private static final float MAX_HEALTH = 25f;
@@ -168,7 +168,7 @@ public class Truck extends Entity implements ContainerListener {
 
     @Override
     protected boolean canAddPassenger(Entity entity) {
-        return this.getPassengers().size() < 4;
+        return this.getPassengers().size() < 2;
     }
 
     @Override

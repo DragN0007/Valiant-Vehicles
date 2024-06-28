@@ -2,6 +2,7 @@ package com.dragn0007.dragnvehicles.item;
 
 import com.dragn0007.dragnvehicles.registry.VehicleRegistry;
 import com.dragn0007.dragnvehicles.vehicle.car.Car;
+import com.dragn0007.dragnvehicles.vehicle.classic.Classic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
@@ -39,7 +40,7 @@ public class ClassicItem extends Item {
             if(level.getBlockState(pos).getBlock() instanceof LiquidBlock) {
                 return InteractionResultHolder.pass(itemStack);
             } else if (level.mayInteract(player, pos) && player.mayUseItemAt(pos, blockHitResult.getDirection(), itemStack)) {
-                Car car = (Car) VehicleRegistry.CLASSIC.get().spawn((ServerLevel) level, itemStack, player, pos.above(), MobSpawnType.SPAWN_EGG, false, false);
+                Classic car = (Classic) VehicleRegistry.CLASSIC.get().spawn((ServerLevel) level, itemStack, player, pos.above(), MobSpawnType.SPAWN_EGG, false, false);
                 if(car == null) {
                     return InteractionResultHolder.pass(itemStack);
                 } else {
