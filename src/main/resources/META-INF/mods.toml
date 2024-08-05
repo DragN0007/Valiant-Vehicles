@@ -7,8 +7,7 @@ modId="dragnvehicles"
 version="${1.18.2-1.2}"
 displayName="DragN's Valiant Vehicles"
 logoFile="dv.png"
-#credits="DragN0007"
-authors="DragN0007"
+authors="DragN0007, EvangeliX"
 description='''
 New cars, trucks, and other vehicles!
 '''
