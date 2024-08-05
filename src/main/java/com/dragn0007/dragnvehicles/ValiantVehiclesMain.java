@@ -1,6 +1,7 @@
 package com.dragn0007.dragnvehicles;
 
 import com.dragn0007.dragnvehicles.registry.ItemRegistry;
+import com.dragn0007.dragnvehicles.registry.VehicleKeyMappings;
 import com.dragn0007.dragnvehicles.registry.VehicleRegistry;
 import com.mojang.logging.LogUtils;
 import net.minecraft.network.FriendlyByteBuf;
@@ -9,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -47,12 +49,8 @@ public class ValiantVehiclesMain
 
     public ValiantVehiclesMain()
     {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        eventBus.addListener(this::setup);
 
         SERIALIZERS.register(eventBus);
         ItemRegistry.ITEMS.register(eventBus);
@@ -61,16 +59,8 @@ public class ValiantVehiclesMain
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-
-    private void setup(final FMLCommonSetupEvent event) {
-    }
-
-    private void enqueueIMC(final InterModEnqueueEvent event)
-    {
-    }
-
-    private void processIMC(final InterModProcessEvent event)
-    {
+    private void clientSetup(FMLClientSetupEvent event) {
+        VehicleKeyMappings.register(event);
     }
 
     public static float mod(float n, float m) {

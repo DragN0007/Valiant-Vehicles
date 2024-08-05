@@ -1,7 +1,8 @@
-package com.dragn0007.dragnvehicles.vehicle.car;
+package com.dragn0007.dragnvehicles.vehicle.sportcar;
 
 import com.dragn0007.dragnvehicles.ValiantVehiclesMain;
 import com.dragn0007.dragnvehicles.registry.ItemRegistry;
+import com.dragn0007.dragnvehicles.registry.VehicleKeyMappings;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Direction;
@@ -17,13 +18,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.DyeColor;
@@ -39,45 +38,48 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.lwjgl.system.CallbackI;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 import static com.dragn0007.dragnvehicles.ValiantVehiclesMain.mod;
 
 
-public class Car extends Entity implements ContainerListener {
+public class SportCar extends Entity implements ContainerListener {
 
-    private static final EntityDataAccessor<ResourceLocation> TEXTURE = (EntityDataAccessor<ResourceLocation>) SynchedEntityData.defineId(Car.class, ValiantVehiclesMain.RESOURCE_SERIALIZER.get().getSerializer());
+    private static final EntityDataAccessor<ResourceLocation> TEXTURE = (EntityDataAccessor<ResourceLocation>) SynchedEntityData.defineId(SportCar.class, ValiantVehiclesMain.RESOURCE_SERIALIZER.get().getSerializer());
 
-    private static final EntityDataAccessor<Float> HEALTH = SynchedEntityData.defineId(Car.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> HEALTH = SynchedEntityData.defineId(SportCar.class, EntityDataSerializers.FLOAT);
 
-    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png");
+    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/white.png");
 
     private static final Map<DyeItem, ResourceLocation> COLOR_MAP = new HashMap<>() {{
-        put(DyeItem.byColor(DyeColor.BLACK), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/black.png"));
-        put(DyeItem.byColor(DyeColor.BLUE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/blue.png"));
-        put(DyeItem.byColor(DyeColor.BROWN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
-        put(DyeItem.byColor(DyeColor.CYAN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
-        put(DyeItem.byColor(DyeColor.GRAY), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
-        put(DyeItem.byColor(DyeColor.LIGHT_BLUE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/light_blue.png"));
-        put(DyeItem.byColor(DyeColor.LIGHT_GRAY), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
-        put(DyeItem.byColor(DyeColor.LIME), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
-        put(DyeItem.byColor(DyeColor.MAGENTA), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
-        put(DyeItem.byColor(DyeColor.ORANGE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
-        put(DyeItem.byColor(DyeColor.PINK), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/pink.png"));
-        put(DyeItem.byColor(DyeColor.PURPLE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/purple.png"));
-        put(DyeItem.byColor(DyeColor.RED), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/red.png"));
-        put(DyeItem.byColor(DyeColor.WHITE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/white.png"));
-        put(DyeItem.byColor(DyeColor.GREEN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/green.png"));
-        put(DyeItem.byColor(DyeColor.YELLOW), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/car/yellow.png"));
+        put(DyeItem.byColor(DyeColor.BLACK), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/black.png"));
+        put(DyeItem.byColor(DyeColor.BLUE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/blue.png"));
+        put(DyeItem.byColor(DyeColor.BROWN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/white.png"));
+        put(DyeItem.byColor(DyeColor.CYAN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/white.png"));
+        put(DyeItem.byColor(DyeColor.GRAY), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/white.png"));
+        put(DyeItem.byColor(DyeColor.LIGHT_BLUE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/light_blue.png"));
+        put(DyeItem.byColor(DyeColor.LIGHT_GRAY), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/white.png"));
+        put(DyeItem.byColor(DyeColor.LIME), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/white.png"));
+        put(DyeItem.byColor(DyeColor.MAGENTA), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/white.png"));
+        put(DyeItem.byColor(DyeColor.ORANGE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/white.png"));
+        put(DyeItem.byColor(DyeColor.PINK), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/pink.png"));
+        put(DyeItem.byColor(DyeColor.PURPLE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/purple.png"));
+        put(DyeItem.byColor(DyeColor.RED), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/red.png"));
+        put(DyeItem.byColor(DyeColor.WHITE), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/white.png"));
+        put(DyeItem.byColor(DyeColor.GREEN), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/green.png"));
+        put(DyeItem.byColor(DyeColor.YELLOW), new ResourceLocation(ValiantVehiclesMain.MODID, "textures/entity/sportcar/yellow.png"));
     }};
 
     private static final float MAX_HEALTH = 20f;
-    private static final float SPEED = 0.20f;
+    private static final float SPEED = 0.24f;
     private static final float TURN_SPEED = 1f;
     private static final float MAX_TURN = 6f;
     private static final float FRICTION = 0.7f;
+    private static final float DRIFTING_FRICTION = 0.9f;
     private static final float GRAVITY = 0.08f;
     private float targetRotation = 0;
     private float currentRotation = 0;
@@ -93,13 +95,13 @@ public class Car extends Entity implements ContainerListener {
     private double targetZ;
     private float targetYRot;
 
-    public Car(EntityType<?> entityType, Level level) {
+    public SportCar(EntityType<?> entityType, Level level) {
         super(entityType, level);
         this.createInventory();
     }
 
     private void createInventory() {
-        this.inventory = new SimpleContainer(27);
+        this.inventory = new SimpleContainer(9);
         this.inventory.addListener(this);
         this.itemHandler = LazyOptional.of(() -> new InvWrapper(this.inventory));
     }
@@ -173,16 +175,16 @@ public class Car extends Entity implements ContainerListener {
         int i = this.getPassengers().indexOf(entity);
         switch (i) {
             case 0:
-                entity.setPos(this.calcOffset(0.6, 0.3, -0.2));
+                entity.setPos(this.calcOffset(0.6, 0.1, -0.2));
                 break;
             case 1:
-                entity.setPos(this.calcOffset(-0.6, 0.3, -0.2));
+                entity.setPos(this.calcOffset(-0.6, 0.1, -0.2));
                 break;
             case 2:
-                entity.setPos(this.calcOffset(0.6, 0.3, -2.0));
+                entity.setPos(this.calcOffset(0.6, 0.1, -2.0));
                 break;
             case 3:
-                entity.setPos(this.calcOffset(-0.6, 0.3, -2.0));
+                entity.setPos(this.calcOffset(-0.6, 0.1, -2.0));
                 break;
         }
     }
@@ -201,7 +203,7 @@ public class Car extends Entity implements ContainerListener {
 
             if(health < 0) {
                 Containers.dropContents(this.level, this, this.inventory);
-                this.spawnAtLocation(ItemRegistry.CAR_SPAWN_EGG.get());
+                this.spawnAtLocation(ItemRegistry.SPORT_CAR_SPAWN_EGG.get());
                 this.kill();
             }
         }
@@ -267,7 +269,51 @@ public class Car extends Entity implements ContainerListener {
             this.setYRot(deg);
         }
 
+        if (this.isVehicle()) {
+            if (VehicleKeyMappings.DRIFT_KEY.isDown()) {
+                this.setFriction(DRIFTING_FRICTION);
+            } else {
+                this.setFriction(FRICTION);
+            }
+        }
+
         this.setDeltaMovement(this.getDeltaMovement().add(-Math.sin(rad) * forward, 0, Math.cos(rad) * forward));
+    }
+
+    protected void setFriction(float friction) {
+        Vec3 adjustedFriction = this.getDeltaMovement().scale(friction);
+        this.setDeltaMovement(adjustedFriction);
+    }
+
+    public float getFrontWheelRotation(float time) {
+        return (this.currentRotation + (this.targetRotation - this.currentRotation) * time) * (float)Math.PI / 180;
+    }
+
+    @Override
+    @NotNull
+    public InteractionResult interact(Player player, InteractionHand hand) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        if(player.isShiftKeyDown()) {
+            if(itemStack.getItem() instanceof DyeItem dyeItem) {
+                this.level.playSound(player, this, SoundEvents.DYE_USE, SoundSource.PLAYERS, 1f, 1f);
+
+                if (!this.level.isClientSide) {
+                    this.entityData.set(TEXTURE, COLOR_MAP.get(dyeItem));
+                    itemStack.shrink(1);
+                }
+
+                return InteractionResult.sidedSuccess(this.level.isClientSide);
+            } else {
+                if(!this.level.isClientSide) {
+                    NetworkHooks.openGui((ServerPlayer) player, new SimpleMenuProvider((containerId, inventory, serverPlayer) -> {
+                        return ChestMenu.oneRow(containerId, inventory);
+                    }, this.getDisplayName()));
+                }
+            }
+        } else if(!this.level.isClientSide){
+            return player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
+        }
+        return super.interact(player, hand);
     }
 
     @Override
@@ -311,37 +357,6 @@ public class Car extends Entity implements ContainerListener {
         }
 
         this.calcAnimStep();
-    }
-
-    public float getFrontWheelRotation(float time) {
-        return (this.currentRotation + (this.targetRotation - this.currentRotation) * time) * (float)Math.PI / 180;
-    }
-
-    @Override
-    @NotNull
-    public InteractionResult interact(Player player, InteractionHand hand) {
-        ItemStack itemStack = player.getItemInHand(hand);
-        if(player.isShiftKeyDown()) {
-            if(itemStack.getItem() instanceof DyeItem dyeItem) {
-                this.level.playSound(player, this, SoundEvents.DYE_USE, SoundSource.PLAYERS, 1f, 1f);
-
-                if (!this.level.isClientSide) {
-                    this.entityData.set(TEXTURE, COLOR_MAP.get(dyeItem));
-                    itemStack.shrink(1);
-                }
-
-                return InteractionResult.sidedSuccess(this.level.isClientSide);
-            } else {
-                if(!this.level.isClientSide) {
-                    NetworkHooks.openGui((ServerPlayer) player, new SimpleMenuProvider((containerId, inventory, serverPlayer) -> {
-                        return ChestMenu.threeRows(containerId, inventory, this.inventory);
-                    }, this.getDisplayName()));
-                }
-            }
-        } else if(!this.level.isClientSide){
-            return player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
-        }
-        return super.interact(player, hand);
     }
 
     public ResourceLocation getTextureLocation() {
@@ -397,7 +412,7 @@ public class Car extends Entity implements ContainerListener {
 
     @Override
     public void containerChanged(Container container) {
-
     }
 }
+
 
