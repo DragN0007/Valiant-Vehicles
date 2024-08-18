@@ -33,4 +33,6 @@ public class ItemRegistry {
             () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_TRANSPORTATION)));
     public static final RegistryObject<Item> ENGINE = ITEMS.register("engine",
             () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_TRANSPORTATION)));
+    public static final RegistryObject<Item> SPORTS_ENGINE = ITEMS.register("sports_engine",
+            () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_TRANSPORTATION)));
 }

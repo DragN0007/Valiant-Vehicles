@@ -22,6 +22,7 @@
   "item.dragnvehicles.wheel": "Wheel",
   "item.dragnvehicles.sports_wheel": "Sports Wheel",
   "item.dragnvehicles.engine": "Engine",
+  "item.dragnvehicles.sports_engine": "Sports Engine",
 
-  "key.dragnvehicles.drift": "Drift"
+  "key.dragnvehicles.drift": "Sports-Car Drift (WIP)"
 }

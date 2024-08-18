@@ -20,13 +20,17 @@ public class VVItemModelProvider extends ItemModelProvider {
         simpleItem(ItemRegistry.CLASSIC_SPAWN_EGG.get());
         simpleItem(ItemRegistry.TRUCK_SPAWN_EGG.get());
         simpleItem(ItemRegistry.SUV_SPAWN_EGG.get());
+        simpleItem(ItemRegistry.SPORT_CAR_SPAWN_EGG.get());
 
         simpleItem(ItemRegistry.CAR_BODY.get());
         simpleItem(ItemRegistry.CLASSIC_BODY.get());
         simpleItem(ItemRegistry.TRUCK_BODY.get());
         simpleItem(ItemRegistry.SUV_BODY.get());
+        simpleItem(ItemRegistry.SPORT_CAR_BODY.get());
         simpleItem(ItemRegistry.WHEEL.get());
+        simpleItem(ItemRegistry.SPORTS_WHEEL.get());
         simpleItem(ItemRegistry.ENGINE.get());
+        simpleItem(ItemRegistry.SPORTS_ENGINE.get());
     }
 
     private ItemModelBuilder simpleItem(Item item) {
