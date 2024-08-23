@@ -2,8 +2,9 @@ package com.dragn0007.dragnvehicles.vehicle.sportcar;
 
 import com.dragn0007.dragnvehicles.ValiantVehiclesMain;
 import com.dragn0007.dragnvehicles.registry.ItemRegistry;
-import com.dragn0007.dragnvehicles.registry.VehicleKeyMappings;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.Input;
+import net.minecraft.client.player.KeyboardInput;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -22,6 +23,7 @@ import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ChestMenu;
@@ -38,11 +40,9 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.system.CallbackI;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
 
 import static com.dragn0007.dragnvehicles.ValiantVehiclesMain.mod;
 
@@ -269,14 +269,6 @@ public class SportCar extends Entity implements ContainerListener {
             this.setYRot(deg);
         }
 
-        if (this.isVehicle()) {
-            if (VehicleKeyMappings.DRIFT_KEY.isDown()) {
-                this.setFriction(DRIFTING_FRICTION);
-            } else {
-                this.setFriction(FRICTION);
-            }
-        }
-
         this.setDeltaMovement(this.getDeltaMovement().add(-Math.sin(rad) * forward, 0, Math.cos(rad) * forward));
     }
 
@@ -355,6 +347,22 @@ public class SportCar extends Entity implements ContainerListener {
             this.setYRot(yRot);
             this.lerpSteps--;
         }
+
+//        if(this.isControlledByLocalInstance() && this.getControllingPassenger() instanceof LocalPlayer player) {
+//            this.handleInput((KeyboardInput) player.input);
+//        }
+//
+//        if (this.isVehicle()) {
+//            LivingEntity livingentity = (LivingEntity) this.getControllingPassenger();
+//            Player player = (Player) livingentity;
+//            Minecraft game = Minecraft.getInstance();
+//            LocalPlayer localPlayer = game.player;
+//            if (localPlayer !=null && localPlayer.input.jumping) {
+//                this.setFriction(DRIFTING_FRICTION);
+//            } else {
+//                this.setFriction(FRICTION);
+//            }
+//        }
 
         this.calcAnimStep();
     }

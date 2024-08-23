@@ -1,7 +1,6 @@
 package com.dragn0007.dragnvehicles;
 
 import com.dragn0007.dragnvehicles.registry.ItemRegistry;
-import com.dragn0007.dragnvehicles.registry.VehicleKeyMappings;
 import com.dragn0007.dragnvehicles.registry.VehicleRegistry;
 import com.mojang.logging.LogUtils;
 import net.minecraft.network.FriendlyByteBuf;
@@ -11,9 +10,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DataSerializerEntry;
 import net.minecraftforge.registries.DeferredRegister;
@@ -60,7 +56,6 @@ public class ValiantVehiclesMain
     }
 
     private void clientSetup(FMLClientSetupEvent event) {
-        VehicleKeyMappings.register(event);
     }
 
     public static float mod(float n, float m) {
