@@ -4,7 +4,7 @@ license="All Rights Reserved, DragN0007"
 issueTrackerURL="https://discord.gg/jubppqCzXj"
 [[mods]]
 modId="dragnvehicles"
-version="${1.18.2-1.2}"
+version="${1.18.2-1.2.1}"
 displayName="DragN's Valiant Vehicles"
 logoFile="dv.png"
 authors="DragN0007, EvangeliX"
