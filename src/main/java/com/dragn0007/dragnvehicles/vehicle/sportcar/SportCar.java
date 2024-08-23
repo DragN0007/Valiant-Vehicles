@@ -269,6 +269,22 @@ public class SportCar extends Entity implements ContainerListener {
             this.setYRot(deg);
         }
 
+//        if(this.isControlledByLocalInstance() && this.getControllingPassenger() instanceof LocalPlayer localPlayer1) {
+//            this.handleInput((KeyboardInput) localPlayer1.input);
+//
+//            if (this.isVehicle()) {
+//                LivingEntity livingentity = (LivingEntity) this.getControllingPassenger();
+//                Player player = (Player) livingentity;
+//                Minecraft game = Minecraft.getInstance();
+//                LocalPlayer localPlayer = game.player;
+//                if (localPlayer != null && localPlayer.input.jumping) {
+//                    this.setFriction(DRIFTING_FRICTION);
+//                } else {
+//                    this.setFriction(FRICTION);
+//                }
+//            }
+//        }
+
         this.setDeltaMovement(this.getDeltaMovement().add(-Math.sin(rad) * forward, 0, Math.cos(rad) * forward));
     }
 
@@ -347,22 +363,6 @@ public class SportCar extends Entity implements ContainerListener {
             this.setYRot(yRot);
             this.lerpSteps--;
         }
-
-//        if(this.isControlledByLocalInstance() && this.getControllingPassenger() instanceof LocalPlayer player) {
-//            this.handleInput((KeyboardInput) player.input);
-//        }
-//
-//        if (this.isVehicle()) {
-//            LivingEntity livingentity = (LivingEntity) this.getControllingPassenger();
-//            Player player = (Player) livingentity;
-//            Minecraft game = Minecraft.getInstance();
-//            LocalPlayer localPlayer = game.player;
-//            if (localPlayer !=null && localPlayer.input.jumping) {
-//                this.setFriction(DRIFTING_FRICTION);
-//            } else {
-//                this.setFriction(FRICTION);
-//            }
-//        }
 
         this.calcAnimStep();
     }
