@@ -1,4 +1,4 @@
-package com.dragn0007.dragnvehicles.vehicle.sportcar;
+package com.dragn0007.dragnvehicles.vehicle.motorcycle;
 
 import com.dragn0007.dragnvehicles.Animation;
 import com.dragn0007.dragnvehicles.ValiantVehiclesMain;
@@ -13,8 +13,8 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-public class SportCarRender extends EntityRenderer<SportCar> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ValiantVehiclesMain.MODID, "sportcar"), "main");
+public class MotorcycleRender extends EntityRenderer<Motorcycle> {
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(ValiantVehiclesMain.MODID, "motorcycle"), "main");
 
     public static final Animation BODY_ANIMATION = new Animation(1f, new Animation.KeyFrame[]{
             new Animation.KeyFrame(0f, 0f, 0f, 0f),
@@ -34,35 +34,35 @@ public class SportCarRender extends EntityRenderer<SportCar> {
             new Animation.KeyFrame(0.3f, 360f, 0f, 0f)
     });
 
-    private final SportCarModel model;
+    private final MotorcycleModel model;
 
-    public SportCarRender(EntityRendererProvider.Context context) {
+    public MotorcycleRender(EntityRendererProvider.Context context) {
         super(context);
-        this.model = new SportCarModel(context.bakeLayer(LAYER_LOCATION));
+        this.model = new MotorcycleModel<>(context.bakeLayer(LAYER_LOCATION));
     }
 
     @Override
-    public void render(SportCar sportcar, float rotation, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+    public void render(Motorcycle motorcycle, float rotation, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
 
         poseStack.scale(-1, -1, 1);
         poseStack.translate(0, -1.5, 0);
 
         poseStack.mulPose(Vector3f.YP.rotationDegrees(rotation - 180));
-        this.model.prepareMobModel(sportcar, 0, 0, partialTick);
-        this.model.setupAnim(sportcar, partialTick, 0, 0, 0, 0);
+        this.model.prepareMobModel(motorcycle, 0, 0, partialTick);
+        this.model.setupAnim(motorcycle, partialTick, 0, 0, 0, 0);
 
-        VertexConsumer vertexConsumer = bufferSource.getBuffer(this.model.renderType(sportcar.getTextureLocation()));
+        VertexConsumer vertexConsumer = bufferSource.getBuffer(this.model.renderType(motorcycle.getTextureLocation()));
         this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
 
         poseStack.popPose();
-        super.render(sportcar, rotation, partialTick, poseStack, bufferSource, packedLight);
+        super.render(motorcycle, rotation, partialTick, poseStack, bufferSource, packedLight);
     }
 
     @Override
     @NotNull
-    public ResourceLocation getTextureLocation(SportCar sportcar) {
-        return sportcar.getTextureLocation();
+    public ResourceLocation getTextureLocation(Motorcycle motorcycle) {
+        return motorcycle.getTextureLocation();
     }
 }
 

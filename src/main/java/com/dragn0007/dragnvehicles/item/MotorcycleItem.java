@@ -1,7 +1,7 @@
 package com.dragn0007.dragnvehicles.item;
 
 import com.dragn0007.dragnvehicles.registry.VehicleRegistry;
-import com.dragn0007.dragnvehicles.vehicle.sportcar.SportCar;
+import com.dragn0007.dragnvehicles.vehicle.motorcycle.Motorcycle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
@@ -19,9 +19,9 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
-public class SportCarItem extends Item {
+public class MotorcycleItem extends Item {
 
-    public SportCarItem() {
+    public MotorcycleItem() {
         super(new Properties().tab(CreativeModeTab.TAB_TRANSPORTATION));
     }
 
@@ -39,7 +39,7 @@ public class SportCarItem extends Item {
             if(level.getBlockState(pos).getBlock() instanceof LiquidBlock) {
                 return InteractionResultHolder.pass(itemStack);
             } else if (level.mayInteract(player, pos) && player.mayUseItemAt(pos, blockHitResult.getDirection(), itemStack)) {
-                SportCar car = (SportCar) VehicleRegistry.SPORT_CAR.get().spawn((ServerLevel) level, itemStack, player, pos.above(), MobSpawnType.SPAWN_EGG, false, false);
+                Motorcycle car = (Motorcycle) VehicleRegistry.MOTORCYCLE.get().spawn((ServerLevel) level, itemStack, player, pos.above(), MobSpawnType.SPAWN_EGG, false, false);
                 if(car == null) {
                     return InteractionResultHolder.pass(itemStack);
                 } else {

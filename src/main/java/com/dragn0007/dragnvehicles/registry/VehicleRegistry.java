@@ -3,6 +3,7 @@ package com.dragn0007.dragnvehicles.registry;
 import com.dragn0007.dragnvehicles.ValiantVehiclesMain;
 import com.dragn0007.dragnvehicles.vehicle.car.Car;
 import com.dragn0007.dragnvehicles.vehicle.classic.Classic;
+import com.dragn0007.dragnvehicles.vehicle.motorcycle.Motorcycle;
 import com.dragn0007.dragnvehicles.vehicle.sportcar.SportCar;
 import com.dragn0007.dragnvehicles.vehicle.suv.SUV;
 import com.dragn0007.dragnvehicles.vehicle.truck.Truck;
@@ -35,4 +36,8 @@ public class VehicleRegistry {
     public static final RegistryObject<EntityType<SportCar>> SPORT_CAR = ENTITY_TYPES.register("sport_car",
             () -> EntityType.Builder.of(SportCar::new, MobCategory.MISC).sized(3f, 2.2f).build
                     (new ResourceLocation(ValiantVehiclesMain.MODID, "sport_car").toString()));
+
+    public static final RegistryObject<EntityType<Motorcycle>> MOTORCYCLE = ENTITY_TYPES.register("motorcycle",
+            () -> EntityType.Builder.of(Motorcycle::new, MobCategory.MISC).sized(1f, 2f).build
+                    (new ResourceLocation(ValiantVehiclesMain.MODID, "motorcycle").toString()));
 }

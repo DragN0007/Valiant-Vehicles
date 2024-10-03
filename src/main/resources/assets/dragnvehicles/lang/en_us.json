@@ -14,15 +14,17 @@
   "item.dragnvehicles.sport_car": "Sport Car",
   "entity.dragnvehicles.sport_car": "Sport Car",
 
+  "item.dragnvehicles.motorcycle": "Motorcycle",
+  "entity.dragnvehicles.motorcycle": "Motorcycle",
+
   "item.dragnvehicles.car_body": "Modern Car Body",
   "item.dragnvehicles.classic_body": "Classic Car Body",
   "item.dragnvehicles.truck_body": "Pickup Truck Body",
   "item.dragnvehicles.sport_car_body": "Sport Car Body",
   "item.dragnvehicles.suv_body": "SUV Body",
+  "item.dragnvehicles.motorcycle_body": "Motorcycle Body",
   "item.dragnvehicles.wheel": "Wheel",
   "item.dragnvehicles.sports_wheel": "Sports Wheel",
   "item.dragnvehicles.engine": "Engine",
-  "item.dragnvehicles.sports_engine": "Sports Engine",
-
-  "key.dragnvehicles.drift": "Sports-Car Drift (WIP)"
+  "item.dragnvehicles.sports_engine": "Sports Engine"
 }

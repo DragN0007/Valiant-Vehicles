@@ -5,7 +5,8 @@ import com.dragn0007.dragnvehicles.vehicle.car.CarModel;
 import com.dragn0007.dragnvehicles.vehicle.car.CarRender;
 import com.dragn0007.dragnvehicles.vehicle.classic.ClassicModel;
 import com.dragn0007.dragnvehicles.vehicle.classic.ClassicRender;
-import com.dragn0007.dragnvehicles.vehicle.sportcar.SportCar;
+import com.dragn0007.dragnvehicles.vehicle.motorcycle.MotorcycleModel;
+import com.dragn0007.dragnvehicles.vehicle.motorcycle.MotorcycleRender;
 import com.dragn0007.dragnvehicles.vehicle.sportcar.SportCarModel;
 import com.dragn0007.dragnvehicles.vehicle.sportcar.SportCarRender;
 import com.dragn0007.dragnvehicles.vehicle.suv.SUVModel;
@@ -26,6 +27,7 @@ public class VVEvent {
         event.registerLayerDefinition(TruckRender.LAYER_LOCATION, TruckModel::createBodyLayer);
         event.registerLayerDefinition(SUVRender.LAYER_LOCATION, SUVModel::createBodyLayer);
         event.registerLayerDefinition(SportCarRender.LAYER_LOCATION, SportCarModel::createBodyLayer);
+        event.registerLayerDefinition(MotorcycleRender.LAYER_LOCATION, MotorcycleModel::createBodyLayer);
 
     }
 
@@ -36,6 +38,7 @@ public class VVEvent {
         event.registerEntityRenderer(VehicleRegistry.TRUCK.get(), TruckRender::new);
         event.registerEntityRenderer(VehicleRegistry.SUV.get(), SUVRender::new);
         event.registerEntityRenderer(VehicleRegistry.SPORT_CAR.get(), SportCarRender::new);
+        event.registerEntityRenderer(VehicleRegistry.MOTORCYCLE.get(), MotorcycleRender::new);
     }
 }
 

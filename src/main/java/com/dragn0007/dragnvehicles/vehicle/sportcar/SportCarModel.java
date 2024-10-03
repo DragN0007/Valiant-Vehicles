@@ -2,8 +2,6 @@ package com.dragn0007.dragnvehicles.vehicle.sportcar;
 
 
 import com.dragn0007.dragnvehicles.Animation;
-import com.dragn0007.dragnvehicles.vehicle.car.Car;
-import com.dragn0007.dragnvehicles.vehicle.car.CarRender;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -113,17 +111,17 @@ public class SportCarModel extends EntityModel<SportCar> {
 
 	@Override
 	public void prepareMobModel(SportCar car, float p_102615_, float p_102616_, float partialTick) {
-		Animation.animate(this.Body, CarRender.BODY_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
-		Animation.animate(this.FrontWheels, CarRender.FRONT_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
-		Animation.animate(this.BackWheels, CarRender.BACK_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.Body, SportCarRender.BODY_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.FrontWheels, SportCarRender.FRONT_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.BackWheels, SportCarRender.BACK_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
 	}
 
 	@Override
 	public void setupAnim(SportCar car, float partialTick, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		car.updateLastDrivePartialTick(partialTick);
-		Animation.animate(this.Body, CarRender.BODY_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
-		Animation.animate(this.FrontWheels, CarRender.FRONT_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
-		Animation.animate(this.BackWheels, CarRender.BACK_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.Body, SportCarRender.BODY_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.FrontWheels, SportCarRender.FRONT_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
+		Animation.animate(this.BackWheels, SportCarRender.BACK_WHEEL_ANIMATION, car.driveTick, car.lastDrivePartialTick, car.forwardMotion);
 
 		this.FrontWheels.yRot = car.getFrontWheelRotation(partialTick);
 	}

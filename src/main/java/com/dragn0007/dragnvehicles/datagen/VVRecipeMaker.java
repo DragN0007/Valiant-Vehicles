@@ -69,6 +69,15 @@ public class VVRecipeMaker extends RecipeProvider implements IConditionBuilder {
                         .of(ItemRegistry.SPORT_CAR_BODY.get()).build()))
                 .save(pFinishedRecipeConsumer);
 
+        ShapedRecipeBuilder.shaped(ItemRegistry.MOTORCYCLE_SPAWN_EGG.get())
+                .define('A', ItemRegistry.MOTORCYCLE_BODY.get())
+                .define('B', ItemRegistry.WHEEL.get())
+                .pattern(" A ")
+                .pattern("B B")
+                .unlockedBy("has_body", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(ItemRegistry.MOTORCYCLE_BODY.get()).build()))
+                .save(pFinishedRecipeConsumer);
+
 
         ShapedRecipeBuilder.shaped(ItemRegistry.WHEEL.get())
                 .define('A', Items.DRIED_KELP_BLOCK)
@@ -146,6 +155,17 @@ public class VVRecipeMaker extends RecipeProvider implements IConditionBuilder {
                 .define('D', ItemRegistry.ENGINE.get())
                 .pattern("DCB")
                 .pattern("A A")
+                .unlockedBy("has_iron_block", inventoryTrigger(ItemPredicate.Builder.item()
+                        .of(Items.IRON_BLOCK).build()))
+                .save(pFinishedRecipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemRegistry.MOTORCYCLE_BODY.get())
+                .define('A', Items.IRON_BLOCK)
+                .define('B', Items.CHEST)
+                .define('C', Items.GLASS_PANE)
+                .define('D', ItemRegistry.ENGINE.get())
+                .pattern("BDC")
+                .pattern("ADA")
                 .unlockedBy("has_iron_block", inventoryTrigger(ItemPredicate.Builder.item()
                         .of(Items.IRON_BLOCK).build()))
                 .save(pFinishedRecipeConsumer);
