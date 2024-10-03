@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "BDC",
+    "B C",
     "ADA"
   ],
   "key": {
@@ -15,7 +15,7 @@
       "item": "minecraft:glass_pane"
     },
     "D": {
-      "item": "dragnvehicles:engine"
+      "item": "dragnvehicles:sports_engine"
     }
   },
   "result": {
